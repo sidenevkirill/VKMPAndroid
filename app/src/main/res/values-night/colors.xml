@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="icon">#ffffff</color>
+    <color name="black">#FFFFFF</color>
+    <color name="color_tabs">#E4E4E4</color>
+    <color name="color_primary">#141218</color>
+    <color name="color_send">#211F26</color>
+    <color name="card">#211F26</color>
+    <color name="white">#000000</color>
+    <color name="circle_oval">#424242</color>
+    <color name="tab_text">#ffffff</color>
+    <color name="card_video">#1B2931</color>
+    <color name="bg_search">#211F26</color>
+    <color name="bg_view">#CC757575</color>
+    <color name="seekbar_thumb">#FF5722</color>
+    <color name="seekbar_progress">#4CAF50</color>
+    <color name="seekbar_background">#BDBDBD</color>
+    <color name="gray">#808080</color>
+    <color name="primary">#3F51B5</color>
+    <color name="red">#F44336</color>
+    <color name="current_track_bg">#E3F2FD</color>
+    <color name="current_track_text">#1976D2</color>
+    <color name="oval">#454545</color>
+
+    <color name="light_gray">#242424</color>
+    <color name="spinner_light_stroke">#E0E0E0</color>
+    <color name="player_background">#FF121212</color>
+    <color name="player_text_primary">#FFFFFFFF</color>
+    <color name="player_text_secondary">#B3FFFFFF</color>
+    <color name="active_control">#FF1DB954</color>
+    <color name="inactive_control">#55FFFFFF</color>
+
+    <color name="attachment_text_color">#333333</color>
+    <color name="attachment_secondary_text">#666666</color>
+    <color name="attachment_background_color">#F5F5F5</color>
+    <color name="attachment_border_color">#E0E0E0</color>
+
+    <!-- Основные цвета -->
+    <color name="text_primary">#212121</color>
+    <color name="surface">#FAFAFA</color>
+    <color name="divider">#E0E0E0</color>
+
+    <!-- Прозрачные цвета -->
+    <color name="white_alpha_80">#CCFFFFFF</color>
+    <color name="white_alpha_70">#B3FFFFFF</color>
+    <color name="white_alpha_60">#99FFFFFF</color>
+    <color name="white_alpha_30">#4DFFFFFF</color>
+    <color name="white_alpha_20">#33FFFFFF</color>
+
+    <!-- Тестовый режим -->
+    <color name="test_mode_background">#FFF9C4</color>
+    <color name="test_mode_text">#5D4037</color>
+
+    <!-- Дополнительные цвета -->
+    <color name="green_500">#4CAF50</color>
+    <color name="blue_500">#2196F3</color>
+    <color name="red_500">#F44336</color>
+</resources>

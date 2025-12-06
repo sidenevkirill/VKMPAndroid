@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">VKMP</string>
+    <string name="sort_alphavitt">По алфавиту</string>
+    <string name="sort_time">По длительности</string>
+    <string name="tracks_count">%d т</string>
+    <string name="track_info_format">%1$s - %2$s</string>
+    <string name="loading">Загрузка</string>
+
+    <string name="app_description">Слушайте и наслаждайтесь любимой музыкой из социальной сети ВКонтакте</string>
+    <string name="version_template">Версия: %s</string>
+    <string name="open_with">Открыть ссылку в...</string>
+    <string name="no_browser">Не найдено приложение для открытия ссылок</string>
+    <string name="link_error">Ошибка при открытии ссылки</string>
+</resources>

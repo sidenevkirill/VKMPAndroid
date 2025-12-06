@@ -471,6 +471,7 @@ public class MusicPlayerService extends Service implements Player.Listener {
                 .setStyle(new androidx.media.app.NotificationCompat.MediaStyle()
                         .setMediaSession(mediaSession.getSessionToken())
                         .setShowActionsInCompactView(0, 1, 2))
+
                 .addAction(createAction(R.drawable.ic_vector_round_skip_previous, "Previous", ACTION_PREVIOUS))
                 .addAction(createAction(
                         isPlaying ? R.drawable.pause : R.drawable.play,

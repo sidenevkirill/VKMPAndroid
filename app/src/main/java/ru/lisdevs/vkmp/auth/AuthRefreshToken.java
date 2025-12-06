@@ -30,7 +30,7 @@ import ru.lisdevs.vkmp.utils.TokenManager;
 public class AuthRefreshToken extends AppCompatActivity {
 
     private EditText tokenEditText;
-    private Button useTokenButton, buttonEnterToken;
+    private Button useTokenButton, buttonEnterToken, aboutToken;
     private TokenManager tokenManager;
 
     @Override
@@ -51,9 +51,11 @@ public class AuthRefreshToken extends AppCompatActivity {
     private void initViews() {
         tokenEditText = findViewById(R.id.tokenEditText);
         useTokenButton = findViewById(R.id.useTokenButton);
-        buttonEnterToken = findViewById(R.id.openTokenButton);
+        //buttonEnterToken = findViewById(R.id.openTokenButton);
+        aboutToken = findViewById(R.id.aboutTokenButton);
 
-        buttonEnterToken.setOnClickListener(v -> showTokenInputBottomSheet());
+        //buttonEnterToken.setOnClickListener(v -> showTokenInputBottomSheet());
+        aboutToken.setOnClickListener(v -> showTokenAboutBottomSheet());
 
         useTokenButton.setOnClickListener(v -> {
             String token = tokenEditText.getText().toString().trim();
@@ -69,6 +71,14 @@ public class AuthRefreshToken extends AppCompatActivity {
         if (tokenManager.isTokenValid()) {
             navigateToMainActivity();
         }
+    }
+
+    private void showTokenAboutBottomSheet() {
+        View view = getLayoutInflater().inflate(R.layout.bottom_sheet_token_about, null);
+
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+        bottomSheetDialog.setContentView(view);
+        bottomSheetDialog.show();
     }
 
     private void showTokenInputBottomSheet() {

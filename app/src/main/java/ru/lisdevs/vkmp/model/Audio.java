@@ -21,6 +21,9 @@ public class Audio implements Parcelable {
     private int genreId;
     private String cacheKey;
     private String albumTitle;
+    private String itunesImageUrl;
+    private String itunesImageMediumUrl;
+    private String itunesImageLargeUrl;
 
     public Audio(String artist, String title, String url) {
         this.artist = artist;
@@ -58,6 +61,29 @@ public class Audio implements Parcelable {
     public Audio() {
     }
 
+    public String getItunesImageUrl() {
+        return itunesImageUrl;
+    }
+
+    public void setItunesImageUrl(String itunesImageUrl) {
+        this.itunesImageUrl = itunesImageUrl;
+    }
+
+    public String getItunesImageMediumUrl() {
+        return itunesImageMediumUrl;
+    }
+
+    public void setItunesImageMediumUrl(String itunesImageMediumUrl) {
+        this.itunesImageMediumUrl = itunesImageMediumUrl;
+    }
+
+    public String getItunesImageLargeUrl() {
+        return itunesImageLargeUrl;
+    }
+
+    public void setItunesImageLargeUrl(String itunesImageLargeUrl) {
+        this.itunesImageLargeUrl = itunesImageLargeUrl;
+    }
 
     public String getAlbumTitle() { return albumTitle; }
     public void setAlbumTitle(String albumTitle) { this.albumTitle = albumTitle; }

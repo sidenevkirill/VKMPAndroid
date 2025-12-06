@@ -66,4 +66,6 @@ dependencies {
     implementation("com.google.android.exoplayer:exoplayer-hls:2.19.1")
     implementation("com.google.android.exoplayer:exoplayer-ui:2.19.1")
     implementation("com.google.android.exoplayer:extension-okhttp:2.19.1")
+    implementation("androidx.room:room-rxjava2:2.5.0")
+    implementation("androidx.room:room-runtime:2.5.0")
 }

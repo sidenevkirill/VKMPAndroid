@@ -10,10 +10,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="MOOSIC"
+        android:text="VKMP"
         android:gravity="center"
         android:textSize="22sp"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="180dp"
         android:textColor="#000000"
         android:textStyle="bold"
         />
@@ -29,41 +29,109 @@
         android:textColor="?android:textColorSecondary"
         />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/input.layout.password"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp"
         android:layout_marginTop="16dp"
-        android:hint="Введите токен"
-        app:boxStrokeColor="?colorAccent"
-        app:hintTextColor="?colorAccent">
+        app:cardBackgroundColor="#FBFBFB"
+        android:layout_marginBottom="24dp">
 
-        <EditText
-            android:id="@+id/tokenEditText"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:inputType="textPassword" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:orientation="vertical"
+            android:padding="24dp">
 
+            <!-- Username Field -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/input.layout.password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxStrokeColor="@color/black"
+                android:layout_marginBottom="16dp"
+                app:startIconTint="@color/black">
 
-    <!-- Кнопка для подтверждения -->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tokenEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Вставьте ваш токен"
+                    android:textColorHint="@color/text_primary"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Login Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/useTokenButton"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="ВОЙТИ"
+                android:textSize="16sp"
+                app:cornerRadius="16dp"
+                app:strokeColor="@color/gray"
+                app:strokeWidth="0.1sp"
+                app:backgroundTint="@color/color_primary"
+                android:textColor="@color/black"
+                android:layout_marginBottom="16dp"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp" />
+
+            <!-- Progress Bar -->
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:visibility="gone"
+                app:indicatorColor="@color/color_primary"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Quick Actions -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:id="@+id/tv_quick_test"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Долгое нажатие для теста"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
     <Button
-        android:id="@+id/useTokenButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center"
-        android:text="ВОЙТИ" />
-    <!-- Кнопка для подтверждения -->
-    <Button
-        android:id="@+id/openTokenButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center"
-        android:text="ОТКРЫТЬ" />
+        android:id="@+id/aboutTokenButton"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="КАК ПОЛУЧИТЬ ТОКЕН?"
+        android:textSize="16sp"
+        app:cornerRadius="16dp"
+        app:strokeColor="@color/gray"
+        app:strokeWidth="0.1sp"
+        app:backgroundTint="@color/color_primary"
+        android:textColor="@color/black"
+        android:layout_marginBottom="16dp"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp" />
 
 </LinearLayout>

@@ -68,15 +68,8 @@ import ru.lisdevs.vkmp.service.MusicPlayerService;
 import ru.lisdevs.vkmp.settings.SettingsFragment;
 import ru.lisdevs.vkmp.utils.TokenManager;
 
-/**
- * Фрагмент для отображения списка музыки из VK и управления воспроизведением.
- */
 import androidx.annotation.Nullable;
-
 import android.widget.ProgressBar;
-
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 
 public class MyMusicFragment extends Fragment {
@@ -461,6 +454,10 @@ public class MyMusicFragment extends Fragment {
                 audio.setAudioId(audioId);
                 audio.setLyricsId(lyricsId);
                 audio.setDuration(duration);
+
+                // Запрашиваем обложку из iTunes
+                fetchItunesCover(audio);
+
                 result.add(audio);
             }
         }
@@ -489,6 +486,73 @@ public class MyMusicFragment extends Fragment {
             adapter.notifyDataSetChanged();
             Toast.makeText(getContext(), "Треки перемешаны", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void fetchItunesCover(Audio audio) {
+        String searchTerm = audio.getArtist() + " " + audio.getTitle();
+        String encodedTerm = Uri.encode(searchTerm);
+
+        String url = "https://itunes.apple.com/search?media=music&limit=1&term=" + encodedTerm;
+
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(url)
+                .header("User-Agent", "Mozilla/5.0")
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                // В случае ошибки - пропускаем
+                Log.d("iTunesCover", "Failed to fetch cover for: " + audio.getTitle());
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                try {
+                    String responseBody = response.body().string();
+                    JSONObject json = new JSONObject(responseBody);
+
+                    if (json.has("results") && json.getJSONArray("results").length() > 0) {
+                        JSONObject trackInfo = json.getJSONArray("results").getJSONObject(0);
+
+                        // Получаем URL обложки
+                        String artworkUrl = trackInfo.optString("artworkUrl100", "");
+
+                        if (!artworkUrl.isEmpty()) {
+                            // Обновляем размеры обложки
+                            String mediumUrl = artworkUrl.replace("100x100", "300x300");
+                            String largeUrl = artworkUrl.replace("100x100", "600x600");
+
+                            audio.setItunesImageUrl(artworkUrl);
+                            audio.setItunesImageMediumUrl(mediumUrl);
+                            audio.setItunesImageLargeUrl(largeUrl);
+
+                            // Обновляем UI в основном потоке
+                            requireActivity().runOnUiThread(() -> {
+                                int position = findAudioPosition(audio);
+                                if (position != -1) {
+                                    adapter.notifyItemChanged(position);
+                                }
+                            });
+                        }
+                    }
+                } catch (JSONException e) {
+                    Log.e("iTunesCover", "Error parsing iTunes response", e);
+                }
+            }
+        });
+    }
+
+    private int findAudioPosition(Audio audio) {
+        for (int i = 0; i < audioList.size(); i++) {
+            Audio current = audioList.get(i);
+            if (current.getArtist().equals(audio.getArtist()) &&
+                    current.getTitle().equals(audio.getTitle())) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     private void showGenreSelectionBottomSheet() {

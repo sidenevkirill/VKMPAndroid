@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_gradient"
+    android:background="#fff"
     android:fillViewport="true">
 
     <LinearLayout
@@ -27,14 +27,13 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@mipmap/ic_launcher"
-                android:layout_marginBottom="16dp"
-                app:tint="@color/white" />
+                android:layout_marginBottom="16dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="VKMP"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="28sp"
                 android:textStyle="bold"
                 android:letterSpacing="0.02"
@@ -121,10 +120,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="20dp"
-            app:cardElevation="8dp"
+            app:cardElevation="0dp"
             android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp"
-            app:cardBackgroundColor="@color/white"
+            app:cardBackgroundColor="#FBFBFB"
             android:layout_marginBottom="24dp">
 
             <LinearLayout
@@ -152,6 +151,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Логин, email или телефон"
+                        android:textColorHint="@color/text_primary"
                         android:inputType="textEmailAddress"
                         android:maxLines="1"
                         android:textColor="@color/text_primary"
@@ -350,6 +350,8 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:cornerRadius="16dp"
+                    app:strokeColor="@color/gray"
+                    app:strokeWidth="0.1sp"
                     app:backgroundTint="@color/color_primary"
                     android:textColor="@color/black"
                     android:layout_marginBottom="16dp"
@@ -434,12 +436,12 @@
                 android:text="Вход по токену"
                 android:textSize="14sp"
                 app:cornerRadius="12dp"
+                app:strokeColor="@color/gray"
+                app:strokeWidth="0.1sp"
                 android:layout_marginRight="16dp"
                 android:layout_marginLeft="16dp"
                 app:backgroundTint="@color/white"
                 android:textColor="@color/black"
-                app:strokeColor="@color/white"
-                app:strokeWidth="1dp"
                 app:iconGravity="textStart"
                 app:iconPadding="8dp" />
 
@@ -457,7 +459,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Продолжая, вы принимаете условия использования"
-                android:textColor="@color/white_alpha_60"
+                android:textColor="@color/black"
                 android:textSize="12sp"
                 android:gravity="center" />
 

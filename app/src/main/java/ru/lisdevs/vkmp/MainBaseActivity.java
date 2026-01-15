@@ -17,8 +17,8 @@ import ru.lisdevs.vkmp.local.LocalActivity;
 
 public class MainBaseActivity extends AppCompatActivity {
     private static final String CONFIG_URL = "https://raw.githubusercontent.com/sidenevkirill/Sidenevkirill.github.io/refs/heads/master/";
-    private static final String ACTIVITY_A = "ActivityLogin";
-    private static final String ACTIVITY_B = "ActivityLocal";
+    private static final String ACTIVITY_B = "ActivityLogin";
+    private static final String ACTIVITY_A = "ActivityLocal";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

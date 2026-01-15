@@ -68,6 +68,14 @@ public class RecommendationFragment extends Fragment {
     private boolean isLoading = false;
     private boolean hasMore = true;
 
+    public static RecommendationFragment newInstance() {
+        RecommendationFragment fragment = new RecommendationFragment();
+        Bundle args = new Bundle();
+
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     // Жанры
     private final Map<String, Integer> genres = new LinkedHashMap<String, Integer>() {{
         put("Все жанры", 0);

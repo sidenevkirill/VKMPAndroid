@@ -126,6 +126,14 @@ public class MyMusicFragment extends Fragment {
 
     private int currentGenreId = 0;
 
+    public static MyMusicFragment newInstance() {
+        MyMusicFragment fragment = new MyMusicFragment();
+        Bundle args = new Bundle();
+
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

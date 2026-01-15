@@ -20,7 +20,13 @@
         android:id="@+id/action_settings"
         android:icon="@drawable/ic_vector_outline_settings"
         android:title="Настройки"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_about"
+        android:icon="@drawable/ic_vector_outline_settings"
+        android:title="О приложении"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/action_search"

@@ -46,6 +46,7 @@ import ru.lisdevs.vkmp.friends.FriendsSearchFragment;
 import ru.lisdevs.vkmp.groups.GroupsTabsFragment;
 import ru.lisdevs.vkmp.music.MusicListFragment;
 import ru.lisdevs.vkmp.music.MyMusicFragment;
+import ru.lisdevs.vkmp.music.MyMusicTabsFragment;
 import ru.lisdevs.vkmp.player.MiniPlayer;
 import ru.lisdevs.vkmp.player.PlayerBottomSheetFragment;
 import ru.lisdevs.vkmp.playlists.VkPlaylistsFragment;
@@ -171,7 +172,7 @@ public class BaseActivity extends AppCompatActivity
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.item_friends:
-                    changeFragment(new MyMusicFragment());
+                    changeFragment(new MyMusicTabsFragment());
                     return true;
                 case R.id.item_groups:
                     changeFragment(new MusicSearchFragment());
@@ -180,7 +181,7 @@ public class BaseActivity extends AppCompatActivity
                     changeFragment(new FriendsFragment());
                     return true;
                 case R.id.item_account:
-                    changeFragment(new GroupsTabsFragment());
+                    changeFragment(new MyMusicTabsFragment());
                     return true;
             }
             return false;

@@ -101,7 +101,7 @@ public class AboutFragment extends Fragment {
                         "Исходный код",
                         "Github",
                         R.drawable.github,
-                        "https://github.com/sidenevkirill/VK-Moosic-Player-Android"
+                        "https://github.com/sidenevkirill/VKMPAndroid"
                 ),
                 new MenuItem(
                         "Поддержать проект",

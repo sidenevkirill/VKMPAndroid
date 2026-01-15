@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
@@ -50,12 +51,16 @@ public class LocalMusicFragment extends Fragment implements ServiceConnection {
     private SwipeRefreshLayout swipeRefreshLayout;
     private TextView emptyView;
     private boolean isSearchMode = false;
-    private Toolbar toolbar; // Добавлен Toolbar
+    private Toolbar toolbar;
+    private boolean permissionRequested = false; // Флаг для отслеживания запроса разрешений
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        // Запрашиваем разрешение при создании фрагмента
+        requestStoragePermission();
     }
 
     @Override
@@ -73,7 +78,6 @@ public class LocalMusicFragment extends Fragment implements ServiceConnection {
         }
 
         toolbar.setNavigationOnClickListener(v -> {
-            // Возвращаемся назад
             requireActivity().onBackPressed();
         });
 
@@ -95,12 +99,93 @@ public class LocalMusicFragment extends Fragment implements ServiceConnection {
         Intent serviceIntent = new Intent(getActivity(), MusicPlayerService.class);
         getActivity().bindService(serviceIntent, this, Context.BIND_AUTO_CREATE);
 
+        // Проверяем разрешение и загружаем аудио
         checkPermissionsAndLoad();
 
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Если разрешение уже запрашивалось и было отклонено, показываем объяснение
+        if (permissionRequested && !hasStoragePermission()) {
+            showPermissionRationale();
+        }
+    }
 
+    private void requestStoragePermission() {
+        if (!hasStoragePermission()) {
+            // Проверяем, нужно ли показывать объяснение
+            if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                // Показываем объяснение пользователю
+                showPermissionRationale();
+            } else {
+                // Запрашиваем разрешение сразу
+                ActivityCompat.requestPermissions(requireActivity(),
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        PERMISSION_REQUEST_CODE);
+                permissionRequested = true;
+            }
+        }
+    }
+
+    private void showPermissionRationale() {
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Доступ к хранилищу")
+                .setMessage("Для отображения локальных аудиофайлов необходимо предоставить доступ к хранилищу устройства.")
+                .setPositiveButton("Предоставить", (dialog, which) -> {
+                    ActivityCompat.requestPermissions(requireActivity(),
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            PERMISSION_REQUEST_CODE);
+                })
+                .setNegativeButton("Отмена", (dialog, which) -> {
+                    dialog.dismiss();
+                    showPermissionDeniedMessage();
+                })
+                .setCancelable(false)
+                .show();
+    }
+
+    private void showPermissionDeniedMessage() {
+        emptyView.setText("Доступ к хранилищу запрещен. Разрешите доступ в настройках приложения.");
+        emptyView.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
+    }
+
+    private boolean hasStoragePermission() {
+        return ContextCompat.checkSelfPermission(requireContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void checkPermissionsAndLoad() {
+        if (hasStoragePermission()) {
+            loadLocalAudio();
+        } else {
+            // Показываем сообщение о необходимости разрешения
+            emptyView.setText("Загрузка аудиофайлов...");
+            emptyView.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Разрешение получено, загружаем аудио
+                loadLocalAudio();
+            } else {
+                // Разрешение отклонено
+                Toast.makeText(getContext(), "Доступ запрещен", Toast.LENGTH_SHORT).show();
+                swipeRefreshLayout.setRefreshing(false);
+                showPermissionDeniedMessage();
+            }
+        }
+    }
+
+    // Остальные методы остаются без изменений
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.search, menu);
@@ -191,31 +276,6 @@ public class LocalMusicFragment extends Fragment implements ServiceConnection {
                 getActivity().startService(playIntent);
             } else {
                 Toast.makeText(getContext(), "Файл не найден", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    private void checkPermissionsAndLoad() {
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                    PERMISSION_REQUEST_CODE);
-        } else {
-            loadLocalAudio();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        if (requestCode == PERMISSION_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                loadLocalAudio();
-            } else {
-                Toast.makeText(getContext(), "Доступ запрещен", Toast.LENGTH_SHORT).show();
-                swipeRefreshLayout.setRefreshing(false);
-                updateEmptyView();
             }
         }
     }

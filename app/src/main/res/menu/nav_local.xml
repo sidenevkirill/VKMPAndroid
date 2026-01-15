@@ -3,21 +3,23 @@
 
     <item
         android:id="@+id/item_friends"
-        android:icon="@drawable/item_home_selector"
-        android:title="Главная" />
+        android:icon="@drawable/item_my_selector"
+        android:title="Треки" />
 
     <item
-        android:id="@+id/item_search"
+        android:id="@+id/item_groups"
         android:icon="@drawable/playlist_music"
         android:title="Плейлисты" />
 
     <item
-        android:id="@+id/item_groups"
-        android:icon="@drawable/searc"
-        android:title="Поиск" />
+        android:id="@+id/item_search"
+        android:icon="@drawable/item_friends_selector"
+        android:visible="false"
+        android:title="Друзья" />
 
     <item
         android:id="@+id/item_account"
-        android:icon="@drawable/item_menu_selector"
-        android:title="Меню" />
+        android:icon="@drawable/item_group_selector"
+        android:visible="false"
+        android:title="Группы" />
 </menu>

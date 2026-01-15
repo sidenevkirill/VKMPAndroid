@@ -10,8 +10,8 @@ android {
         applicationId = "ru.lisdevs.vkmp"
         minSdk = 21
         targetSdk = 36
-        versionCode = 1
-        versionName = "0.0.1"
+        versionCode = 5
+        versionName = "0.0.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

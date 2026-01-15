@@ -77,13 +77,13 @@ public class AboutFragment extends Fragment {
                         "Наш сайт",
                         "Официальный сайт проекта",
                         R.drawable.public_24px,
-                        "https://sidenevkirill.github.io/"
+                        "https://vkmoosic.web.app/"
                 ),
                 new MenuItem(
                         "Паблик ВКонтакте",
                         "Новости и обсуждения",
                         R.drawable.vk,
-                        "https://vk.com/club231807504"
+                        "https://vk.com/vkmussic"
                 ),
                 new MenuItem(
                         "Telegram канал",
@@ -95,13 +95,13 @@ public class AboutFragment extends Fragment {
                         "Разработчик",
                         "Сиденёв Кирилл",
                         R.drawable.account,
-                        "https://t.me/lisdevs"
+                        "https://vk.com/sidenyovk"
                 ),
                 new MenuItem(
                         "Исходный код",
                         "Github",
                         R.drawable.github,
-                        "https://github.com/sidenevkirill/scrippy"
+                        "https://github.com/sidenevkirill/VK-Moosic-Player-Android"
                 ),
                 new MenuItem(
                         "Поддержать проект",
@@ -207,6 +207,35 @@ public class AboutFragment extends Fragment {
     }
 
     private void openWebsite(String url) {
+        try {
+            if (!url.startsWith("http")) {
+                url = "https://" + url;
+            }
+
+            // Открываем в WebView внутри приложения
+            String title = "Ссылка";
+            if (url.contains("github.com")) {
+                title = "GitHub";
+            } else if (url.contains("vk.com")) {
+                title = "ВКонтакте";
+            } else if (url.contains("t.me")) {
+                title = "Telegram";
+            }
+
+            WebViewFragment webViewFragment = WebViewFragment.newInstance(url, title);
+
+            requireActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, webViewFragment)
+                    .addToBackStack("webview")
+                    .commit();
+
+        } catch (Exception e) {
+            // Если WebView не работает, открываем в браузере
+            openInBrowser(url);
+        }
+    }
+
+    private void openInBrowser(String url) {
         try {
             if (!url.startsWith("http")) {
                 url = "https://" + url;

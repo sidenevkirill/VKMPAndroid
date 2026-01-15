@@ -20,6 +20,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import ru.lisdevs.vkmp.R;
 import ru.lisdevs.vkmp.friends.FriendsFragment;
 import ru.lisdevs.vkmp.friends.FriendsSearchFragment;
+import ru.lisdevs.vkmp.music.LocalMusicFragment;
 import ru.lisdevs.vkmp.music.MusicListFragment;
 import ru.lisdevs.vkmp.player.MiniPlayer;
 
@@ -50,16 +51,16 @@ public class LocalActivity extends AppCompatActivity implements MusicListFragmen
         miniPlayer = new MiniPlayer(this, miniPlayerContainer, artistTextView,
                 titleTextView, playPauseButton, nextButton, prevButton);
 
-        showBottomSheetIfFirstLaunch();
+        //showBottomSheetIfFirstLaunch();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.item_friends:
-                    changeFragment(new FriendsFragment());
+                    changeFragment(new LocalMusicFragment());
                     return true;
                 case R.id.item_groups:
-                    changeFragment(new FriendsSearchFragment());
+                    changeFragment(new LocalPlaylistsFragment());
                     return true;
                 case R.id.item_search:
                     changeFragment(new FriendsFragment());
@@ -72,7 +73,7 @@ public class LocalActivity extends AppCompatActivity implements MusicListFragmen
         });
 
         if (savedInstanceState == null) {
-            changeFragment(new FriendsFragment());
+            changeFragment(new LocalMusicFragment());
         }
     }
 
